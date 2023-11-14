@@ -30,6 +30,7 @@
 		<Link href="/json-named-exports">JSON Named Exports</Link>
 		<Link href="/conditional-imports">Conditional Imports</Link>
 		<Link href="/glob-import">Glob Import</Link>
+		<Link href="/web-workers">Web Workers</Link>
 	</Section>
 	<Section title="Environments and Build Modes">
 		<Link href="/environments-and-modes">Build Modes</Link>
@@ -58,5 +59,6 @@
 		<Link href="/esbuild-options">ESBuild Options</Link>
 		<Link href="/hot-module-replacement">Hot Module Replacement</Link>
 		<Link href="/preserve-modules">preserveModules</Link>
+		<Link href="/cheat-sheet">cheatsheet</Link>
 	</Section>
 </nav>

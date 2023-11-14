@@ -81,6 +81,35 @@ export default function loadImage() {
 
 In development, the asset URL will point to its direct path like `/img.png`. However, during the production build, it changes to a hashed version, say `/assets/img.2d8efhg.png`.
 
+### Import Queries
+
+Special queries can modify how assets are loaded:
+
+```js
+// Explicitly load assets as URL
+import assetAsURL from './asset.js?url'
+```
+
+```js
+// Load assets as strings
+import assetAsString from './shader.glsl?raw'
+```
+
+```js
+// Load Web Workers
+import Worker from './worker.js?worker'
+```
+
+```js
+// Web Workers inlined as base64 strings at build time
+import InlineWorker from './worker.js?worker&inline'
+```
+
+```js
+import './foo.css' // will be injected into the page
+import otherStyles from './bar.css?inline' // will not be injected
+```
+
 ## Asset Inlining
 
 If an asset is smaller than the limit specified in `assetsInlineLimit`, it will be inlined as a base64 data URL, thereby reducing HTTP requests.

@@ -30,6 +30,8 @@ function inlineCSS() {
 
 ## A Lazier Way That You Shouldn't Do
 
+>by default in `development` mode all imported css files in javascript files as `import './index.css'` will bundeled as critical css (in head with `<style>`), to make them bundeled as splitted files import them in html as `<link />`. remember this happen only at dev time, at build time all css by default will extracted as file. 
+
 ```
 <script type="module">
 	import styles from './src/style.css?inline';

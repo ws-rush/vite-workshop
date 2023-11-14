@@ -1,6 +1,7 @@
 type ContentFile =
 	| 'assets-include'
 	| 'basic-setup'
+	| 'cheat-sheet'
 	| 'conditional-imports'
 	| 'configuration'
 	| 'core-features'
@@ -42,4 +43,5 @@ type ContentFile =
 	| 'templates'
 	| 'typed-css-modules'
 	| 'typescript'
+	| 'web-workers'
 	| 'why-vite';
