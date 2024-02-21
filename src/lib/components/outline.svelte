@@ -15,11 +15,6 @@
 		<Link href="/postcss">PostCSS</Link>
 		<Link href="/sass">Using Sass with Vite</Link>
 	</Section>
-	<Section title="TypeScript and Frameworks">
-		<Link href="/typescript">Vite with TypeScript</Link>
-		<Link href="/frameworks">Vite with Frameworks</Link>
-		<Link href="/templates">Project Templates</Link>
-	</Section>
 	<Section title="Assets">
 		<Link href="/static-assets">Working with Static Assets</Link>
 		<Link href="/assets-include">assetsInclude</Link>
@@ -35,6 +30,11 @@
 	<Section title="Environments and Build Modes">
 		<Link href="/environments-and-modes">Build Modes</Link>
 		<Link href="/environment-variables">Environment Variables</Link>
+	</Section>
+	<Section title="TypeScript and Frameworks">
+		<Link href="/typescript">Vite with TypeScript</Link>
+		<Link href="/frameworks">Vite with Frameworks</Link>
+		<Link href="/templates">Project Templates</Link>
 	</Section>
 	<Section title="Building Libraries">
 		<Link href="/library-mode">Library Mode</Link>
