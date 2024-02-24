@@ -87,27 +87,27 @@ Special queries can modify how assets are loaded:
 
 ```js
 // Explicitly load assets as URL
-import assetAsURL from './asset.js?url'
+import assetAsURL from './asset.js?url';
 ```
 
 ```js
 // Load assets as strings
-import assetAsString from './shader.glsl?raw'
+import assetAsString from './shader.glsl?raw';
 ```
 
 ```js
 // Load Web Workers
-import Worker from './worker.js?worker'
+import Worker from './worker.js?worker';
 ```
 
 ```js
 // Web Workers inlined as base64 strings at build time
-import InlineWorker from './worker.js?worker&inline'
+import InlineWorker from './worker.js?worker&inline';
 ```
 
 ```js
-import './foo.css' // will be injected into the page
-import otherStyles from './bar.css?inline' // will not be injected
+import './foo.css'; // will be injected into the page
+import otherStyles from './bar.css?inline'; // will not be injected
 ```
 
 ## Asset Inlining

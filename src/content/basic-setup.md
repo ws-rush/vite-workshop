@@ -73,6 +73,10 @@ This fixes both issues:
 
 You can read more about `type="module"` [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type).
 
+## Resolve Imports
+
+To observe how Vite bundles files in development mode, you can install vite-plugin-inspect. This plugin allows you to inspect and analyze the bundling process of Vite or its plugins in every stage. By integrating this tool, you can gain insights into how Vite handles file bundling and see the specifics of each step in the process.
+
 ## Building
 
 You can build the application using either:
@@ -99,78 +103,4 @@ dist
 └── robots.txt
 ```
 
-It's everything in the `public` directory, our `index.html`, and the compiled bundle in an `assets` directory. In this case, it does some basic inlining and minification. There is nothing particularly special to see here.
-
-## Dynamic Imports
-
-In the previous example, even through we've broken our code up between two modules, Rollup is smart enought to figure out that they're all loaded at the same time and inlines them.
-
-If we used a `import()` to load our file dynamically, we'll see that it's smart enough to split up our code.
-
-```js
-import('./counter.js').then(({ initializeCounter }) => {
-	initializeCounter();
-});
-```
-
-We'll now see that we have two assets.
-
-```
-dist
-├── …
-├── assets
-│   ├── counter-7777d3c9.js
-│   └── index-1060a589.js
-└── …
-```
-
-**Extension**: I wrote a little piece on adding [Hot Module Replacement](./hot-module-replacement.md) to this example. But, let's be honest if you're not writing your own framework, you're probably _not_ doing this yourself.
-
-## Exercise: Dynamic Loading
-
-This is a little bit contrived, but we're going to work with what we have. If the count goes negative, we want to show a banner.
-
-We'll probably start with something like this:
-
-```js
-const render = () => {
-	countElement.textContent = count;
-
-	if (count < 0) {
-		// Your code here.
-	}
-};
-```
-
-Some **tasting notes**:
-
-- Try out using an regular import and a dynamic import.
-- You can place our little note into the `#content` element.
-- Don't worry about removing or dismissing the banner. (This is a workshop on a build tool, not DOM manipulation. But, like, feel free to remove it if you want, I guess.)
-- Don't worry about styling.
-
-Your code could be as simple as something like this:
-
-```js
-export const addBanner = (text) => {
-	document.querySelector('#content').textContent = text;
-};
-```
-
-<details><summary>Solution</summary>
-
-A quick and easy way to add a banner:
-
-```js
-const render = () => {
-	countElement.textContent = count;
-
-	if (count < 0) {
-		import('./add-banner.js').then(({ addBanner }) => {
-			addBanner('The counter is negative!');
-		});
-	}
-};
-```
-
-</details>
+It's everything in the `dist` directory, our `index.html`, and the compiled bundle `index-03e7ded5.js` in an `assets` directory. In this case, it does some basic inlining and minification. There is nothing particularly special to see here. The most important thing to notice is how Vite bundles the code in a format that the browser can efficiently understand.
