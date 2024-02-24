@@ -23,7 +23,7 @@
 	<Section title="Importing">
 		<Link href="/import-meta">import.meta</Link>
 		<Link href="/json-named-exports">JSON Named Exports</Link>
-		<Link href="/conditional-imports">Conditional Imports</Link>
+		<Link href="/dynamic-imports">Dynamic and Conditional Imports</Link>
 		<Link href="/glob-import">Glob Import</Link>
 		<Link href="/web-workers">Web Workers</Link>
 	</Section>

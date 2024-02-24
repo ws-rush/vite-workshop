@@ -2,7 +2,7 @@ type ContentFile =
 	| 'assets-include'
 	| 'basic-setup'
 	| 'cheat-sheet'
-	| 'conditional-imports'
+	| 'dynamic-imports'
 	| 'configuration'
 	| 'core-features'
 	| 'create-vite-server'

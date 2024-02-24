@@ -1,8 +1,84 @@
 ---
-title: Conditional Imports and Dynamic Imports
+title: Dynamic and Conditional Imports
 ---
 
-# Conditional Imports and Dynamic Imports
+# Dynamic and Conditional Imports
+
+## Dynamic Imports
+
+In Baisc Setup example, even through we've broken our code up between two modules, Rollup is smart enought to figure out that they're all loaded at the same time and inlines them.
+
+If we used a `import()` to load our file dynamically, we'll see that it's smart enough to split up our code.
+
+```js
+import('./counter.js').then(({ initializeCounter }) => {
+	initializeCounter();
+});
+```
+
+We'll now see that we have two assets.
+
+```
+dist
+├── …
+├── assets
+│   ├── counter-7777d3c9.js
+│   └── index-1060a589.js
+└── …
+```
+
+**Extension**: I wrote a little piece on adding [Hot Module Replacement](./hot-module-replacement.md) to this example. But, let's be honest if you're not writing your own framework, you're probably _not_ doing this yourself.
+
+### Exercise: Dynamic Loading
+
+This is a little bit contrived, but we're going to work with what we have. If the count goes negative, we want to show a banner.
+
+We'll probably start with something like this:
+
+```js
+const render = () => {
+	countElement.textContent = count;
+
+	if (count < 0) {
+		// Your code here.
+	}
+};
+```
+
+Some **tasting notes**:
+
+- Try out using an regular import and a dynamic import.
+- You can place our little note into the `#content` element.
+- Don't worry about removing or dismissing the banner. (This is a workshop on a build tool, not DOM manipulation. But, like, feel free to remove it if you want, I guess.)
+- Don't worry about styling.
+
+Your code could be as simple as something like this:
+
+```js
+export const addBanner = (text) => {
+	document.querySelector('#content').textContent = text;
+};
+```
+
+<details><summary>Solution</summary>
+
+A quick and easy way to add a banner:
+
+```js
+const render = () => {
+	countElement.textContent = count;
+
+	if (count < 0) {
+		import('./add-banner.js').then(({ addBanner }) => {
+			addBanner('The counter is negative!');
+		});
+	}
+};
+```
+
+</details>
+
+## Conditional Imports
 
 Conditional imports allow you to dynamically load different modules based on certain conditions, such as the current environment (development, production, etc.), the platform (browser, Node.js), or even custom conditions that you define.
 
