@@ -110,6 +110,14 @@ To which, you'll get something like the following:
 
 Build the application and look at the end result.
 
+### Usage with TypeScript
+
+If you’re using TypeScript, you might need to declare files directory as module.
+
+```ts
+declare module '@/assets/*';
+```
+
 ### Extension
 
 We _might_ need to take a break as some people install stuff.
