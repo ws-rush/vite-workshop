@@ -90,6 +90,17 @@ Notice how the CSS file is also dynamically added to the DOM as needed.
 
 Here are some additional notes on working with CSS that are a little esoteric. I'll leave these here for you to peruse if you're interested.
 
+### Disabling CSS injection into the page
+
+The automatic injection of CSS contents can be turned off via the ?inline query parameter. In this case, the processed CSS string is returned as the module's default export as usual, but the styles aren't injected to the page.
+
+```js
+import './foo.css'; // will be injected into the page
+import otherStyles from './bar.css?inline'; // will not be injected
+```
+
+> CSS support the usage of ?url to obtain only the file path.
+
 ### `@import` Handling
 
 - Support for CSS `@import` inlining via `postcss-import`
