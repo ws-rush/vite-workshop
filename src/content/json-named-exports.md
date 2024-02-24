@@ -34,6 +34,17 @@ console.log(name); // Output: Alice
 
 This is different from how Node.js or Webpack handle JSON imports, where you typically have to import the whole object and then destructure it.
 
+> actually vite export json like following, check `vite-plugin-inspect` to see it in actoin.
+
+```js
+export const name = 'Alice';
+export const age = 30;
+export default {
+	name: 'Alice',
+	age: 30
+};
+```
+
 ## Usage with TypeScript
 
 If you're using TypeScript, you might need to declare the JSON module to make TypeScript aware of the named exports:
@@ -58,3 +69,5 @@ import('./data.json').then(function ({ name }) {
 	console.log(name); // Output: Alice
 });
 ```
+
+4. **Import path**: use `?url`.
