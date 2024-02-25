@@ -41,6 +41,7 @@ type ContentFile =
 	| 'ssr'
 	| 'static-assets'
 	| 'templates'
+	| 'mpa'
 	| 'typed-css-modules'
 	| 'typescript'
 	| 'web-workers'

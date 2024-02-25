@@ -35,6 +35,7 @@
 		<Link href="/typescript">Vite with TypeScript</Link>
 		<Link href="/frameworks">Vite with Frameworks</Link>
 		<Link href="/templates">Project Templates</Link>
+		<Link href="/mpa">Multi Page App</Link>
 	</Section>
 	<Section title="Building Libraries">
 		<Link href="/library-mode">Library Mode</Link>
