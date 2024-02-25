@@ -27,9 +27,11 @@ This means, we could do something like this:
 const content = document.querySelector('#content');
 
 export default function logos() {
+	// modules is object of dynamic imports
 	const modules = import.meta.glob('./logos/**/*.svg');
 
 	for (const m of Object.values(modules)) {
+		// the dynamic import containe exports like { default: '3', convert: () => {} }
 		m().then((svg) => {
 			const img = document.createElement('img');
 			img.width = 100;
@@ -53,6 +55,11 @@ In the `vite-starter` repository, there a function that takes one of those chara
 
 ## Tasting Notes
 
+### Negative Patterns
+
+- Prefixed with `!` to exclude files
+- Transformed code when using negative patterns
+
 ### Lazy Loading and Chunks
 
 - Default lazy-loaded via dynamic imports
@@ -62,23 +69,55 @@ In the `vite-starter` repository, there a function that takes one of those chara
 
 - Usage of `{ eager: true }` as the second argument
 - Transformed code when using eager loading
-- When to use eager importing
+
+```js
+const content = document.querySelector('#content');
+
+export default function logos() {
+	// modules is object of exported imports { default: '3', convert: () => {} }
+	const modules = import.meta.glob('./logos/**/*.svg', { eager: true });
+
+	for (const m of Object.values(modules)) {
+		const img = document.createElement('img');
+		img.width = 100;
+
+		img.src = m.default;
+		content.appendChild(img);
+	}
+}
+```
 
 ### Importing as Strings
 
-- Utilizing Import Reflection syntax with `{ as: 'raw', eager: true }`
+- Utilizing Import Reflection syntax with `{ as: 'raw', eager: true }`, `{ 'src1': 'console.log("pure code")', ... }`
 - Transformed code and its behavior
-- Support for `{ as: 'url' }` for loading assets as URLs
-
-### Negative Patterns
-
-- Prefixed with `!` to exclude files
-- Transformed code when using negative patterns
+- Support for `{ as: 'url' }` for loading assets as URLs `{ 'src1': 'it's url', ... }`
+- without `{ eager: true }` we get same result in `.then(url)`
 
 ### Named Imports
 
 - Using the `import` options to selectively import parts of the modules
-- Example code when using named imports
+
+```js
+const content = document.querySelector('#content');
+
+export default function logos() {
+	// modules is object of dynamic imports
+	const modules = import.meta.glob('./logos/**/*.svg', { import: 'default' });
+
+	for (const m of Object.values(modules)) {
+		// the dynamic import containe the only named export
+		m().then((svg) => {
+			const img = document.createElement('img');
+			img.width = 100;
+
+			img.src = svg;
+			content.appendChild(img);
+		});
+	}
+}
+```
+
 - Tree-shaking support when combined with `eager`
 
 ### Custom Queries
