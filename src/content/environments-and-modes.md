@@ -28,17 +28,18 @@ Vite uses `dotenv` and `dotenv-expand` libraries to load variables from `.env` f
 
 - `.env`: Loaded always
 - `.env.local`: Loaded always, ignored by git
-- `.env.[mode]`: Loaded in a specified mode
+- `.env.[mode]`: Loaded in a specified mode (development, production, etc.)
 - `.env.[mode].local`: Loaded in a specified mode, ignored by git
 
 There are some rules in terms of priority.
 
-- Variables existing at the time of Vite execution take the highest priority.
+- Variables existing at the time of Vite execution (in shell) take the highest priority.
 - Specific mode files override generic ones.
 
 Vite is also looking out for your security.
 
 - Only variables prefixed with `VITE_` are exposed to the client.
+- change variable prefix with config `envPrefix: 'APP_'`
 - Sensitive information should not be included. (Duh.)
 
 ## TypeScript IntelliSense
@@ -65,13 +66,13 @@ interface ImportMeta {
 
 ## HTML Env Replacement
 
-- Variables can be used in HTML files using `%ENV_NAME%` syntax.
+- Variables can be used in HTML files using `%ENV_NAME%` syntax, like `<pre>%VITE_API_URL%</pre>`.
 
 ## Modes
 
 - `development` for dev server and `production` for build command, by default.
 - Modes determine which `.env` files get loaded.
-- Command-line flag `--mode` can be used to specify a mode.
+- Command-line flag `--mode` can be used to specify a mode, like `pnpm build -- --mode "staging"`.
 
 ## Security Notes
 
