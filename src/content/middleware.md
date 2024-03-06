@@ -1,4 +1,8 @@
-### Types of Middleware Mode
+---
+title: Types of Middleware Mode
+---
+
+# Types of Middleware Mode
 
 Vite has two types of middleware modes:
 
@@ -16,7 +20,7 @@ export default {
 };
 ```
 
-### Adding Custom Middleware
+## Adding Custom Middleware
 
 You can add your custom middleware via the `configureServer` hook in your `vite.config.js`. The `configureServer` function will be called with a `ViteDevServer` object, and you can use its `app` property, an instance of `koa`, to add middleware.
 
@@ -70,7 +74,7 @@ async function start() {
 start();
 ```
 
-### Debugging Middleware
+## Debugging Middleware
 
 For debugging, you can run Vite in debug mode to see detailed logs:
 

@@ -37,6 +37,7 @@ type ContentFile =
 	| 'preserve-modules'
 	| 'preview'
 	| 'proxying'
+	| 'dev'
 	| 'sass'
 	| 'ssr'
 	| 'static-assets'

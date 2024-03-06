@@ -46,4 +46,4 @@ export default {
 ### Limitations
 
 - The preview server is not intended to replace a full-featured production server with features like HTTPS, reverse proxying, or load balancing.
-- Custom server middleware you may have defined for the development server won't apply to the preview server.
+- Custom server [middleware](./middleware.md) you may have defined for the development server won't apply to the preview server.

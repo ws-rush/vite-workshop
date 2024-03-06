@@ -43,14 +43,18 @@
 		<Link href="/module-federation">Module Federation</Link>
 	</Section>
 	<Section title="Server Integration">
+		<Link href="/dev">Development Server</Link>
+		<Link href="/preview">Preview Server</Link>
 		<Link href="/proxying">Proxying API Requests</Link>
 		<Link href="/create-vite-server">createViteServer</Link>
+		<Link href="/middleware">Types of Middleware Mode</Link>
 	</Section>
 	<Section title="Plugins and Templates">
 		<Link href="/plugins">Plugins</Link>
 		<Link href="/plugins-virtual-modules">Virtual Modules</Link>
 		<Link href="/plugin-inline-css">Inline CSS Plugin</Link>
 		<Link href="/plugin-markdown">Markdown Plugin</Link>
+		<Link href="/creating-a-text-plugin">Writing a Text Plugin</Link>
 	</Section>
 	<Section title="Appendix">
 		<Link href="/css-and-typescript">CSS and TypeScript</Link>
@@ -60,6 +64,7 @@
 		<Link href="/esbuild-options">ESBuild Options</Link>
 		<Link href="/hot-module-replacement">Hot Module Replacement</Link>
 		<Link href="/preserve-modules">preserveModules</Link>
+		<Link href="/configuration">configuration</Link>
 		<Link href="/cheat-sheet">cheatsheet</Link>
 	</Section>
 </nav>
