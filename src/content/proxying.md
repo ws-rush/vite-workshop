@@ -10,6 +10,8 @@ Proxying in Vite allows you to forward certain HTTP requests to another server, 
 
 To set up a proxy, you can modify your `vite.config.js` to include a `proxy` object inside the `server` configuration.
 
+> A proxy serves a purpose beyond development; it can also be utilized for preview by incorporating it into the `preview` configuration instead of the `server`
+
 Here's an example:
 
 ```js
@@ -21,16 +23,13 @@ export default defineConfig({
 	plugins: [react()],
 	server: {
 		proxy: {
-			'/todos': {
-				target: 'http://localhost:3000',
-				changeOrigin: true
-			}
+			'/todos': 'http://localhost:3000'
 		}
 	}
 });
 ```
 
-In this configuration, any request that starts with `/api` on your development server will be forwarded to `http://localhost:3001`.
+In this configuration, any request that starts with `/todos` on your development server will be forwarded to `http://localhost:3000`.
 
 ### Advanced Configuration
 
@@ -55,7 +54,7 @@ In this configuration:
 
 - `target` specifies the server to which the request should be proxied.
 - `changeOrigin` changes the origin of the host header to the target URL.
-- `rewrite` allows you to modify the path of the request URL.
+- `rewrite` allows you to modify the path of the request URL. in this example before redirect requests start with /api to target remove /api and redirect with remaining.
 
 ### WebSockets
 
