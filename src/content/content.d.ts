@@ -1,7 +1,7 @@
 type ContentFile =
 	| 'assets-include'
 	| 'basic-setup'
-	| 'cheat-sheet'
+	| 'unplugin'
 	| 'dynamic-imports'
 	| 'configuration'
 	| 'core-features'

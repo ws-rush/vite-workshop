@@ -57,6 +57,8 @@
 		<Link href="/plugin-inline-css">Inline CSS Plugin</Link>
 		<Link href="/plugin-markdown">Markdown Plugin</Link>
 		<Link href="/creating-a-text-plugin">Writing a Text Plugin</Link>
+		<Link href="/unplugin">Unplugin</Link>
+		<Link href="/hot-module-replacement">Hot Module Replacement</Link>
 	</Section>
 	<Section title="Appendix">
 		<Link href="/css-and-typescript">CSS and TypeScript</Link>
@@ -64,9 +66,7 @@
 		<Link href="/link-and-force-optimization">Link and Force Optimization</Link>
 		<Link href="/optimize-deps">Optimize Dependencies</Link>
 		<Link href="/esbuild-options">ESBuild Options</Link>
-		<Link href="/hot-module-replacement">Hot Module Replacement</Link>
 		<Link href="/preserve-modules">preserveModules</Link>
-		<Link href="/configuration">configuration</Link>
-		<Link href="/cheat-sheet">cheatsheet</Link>
+		<Link href="/configuration">Vite Configuration</Link>
 	</Section>
 </nav>

@@ -25,7 +25,56 @@ export default {
 };
 ```
 
+or dynamic config:
+
+```js
+import { defineConfig, loadEnv } from 'vite';
+
+// command -> [build, serve, ....], mode -> [development, production], ssrBuild
+export default defineConfig(({ command, mode, ssrBuild }) => {
+	// also we can load enviroment variables: mode -> which mode variables, cwd -> current working directory, '' -> vriables that which this string
+	const env = loadEnv(mode, process.cwd(), '');
+
+	// return configs, it can be conditional, like diffrent config for diffrent modes
+	return {};
+});
+```
+
 ## Important Fields
+
+### `base`
+
+Defines the base public path when served in development or production. Useful for deploying to subdirectories.
+
+Set serve url in dev mode, if you integrate with backend project make `base` as static files of backend framework also may change `base` for deployment reasons
+
+> notice: used absolute assets like src="/vite" will not work with new base, src='vite' will work with any
+
+```js
+export default {
+	base: '/subdirectory/' // default is `/`
+};
+```
+
+### `root`
+
+Specifies the root directory for a project. It defaults to the location of the `vite.config.js` file.
+
+```js
+export default {
+	root: './src'
+};
+```
+
+### `publicDir`
+
+Specifies the folder to serve as the root for the dev server and to be copied to the root of the `dist` directory during the build.
+
+```js
+export default {
+	publicDir: 'public'
+};
+```
 
 ### `plugins`
 
@@ -40,43 +89,9 @@ export default {
 };
 ```
 
-### `root`
-
-Specifies the root directory for a project. It defaults to the location of the `vite.config.js` file.
-
-```js
-export default {
-	root: './src'
-};
-```
-
-### `resolve`
-
-Customize how Vite resolves modules. For example, to add custom aliasing:
-
-```js
-export default {
-	resolve: {
-		alias: {
-			'@': '/src'
-		}
-	}
-};
-```
-
-### `publicDir`
-
-Specifies the directory for static assets. The default is the `public` directory.
-
-```js
-export default {
-	publicDir: 'static-assets'
-};
-```
-
 ### `server`
 
-Configuration related to the development server.
+Configuration options for the development server, such as `host`, `port`, `strictPort`, and `proxy`.
 
 ```js
 export default {
@@ -92,16 +107,34 @@ export default {
 
 ### `build`
 
-Controls how your project is built for production.
+Contains options for the build process, such as `rollupOptions`, `target`, `outDir`, and more. For example, you can control how CSS code-splitting works:
 
 ```js
 export default {
 	build: {
-		outDir: 'dist',
-		rollupOptions: {
-			// custom Rollup options
-		}
+		outDir: 'dist', // specify build directory, can be'static/' for bakends like django
+		manifest: true, // generate manifest.json in build dir, to easier mapping for pwa and backend integration
+		target: 'es2022', // support newer js versions (not recommanded)
+		cssCodeSplit: true
 		// more options
+	}
+};
+```
+
+### `build.rollupOptions`
+
+Set entrypoints for components, can be single entrypoint for entire app default is index.html and index.js in frontend if this option doesnt set when make more than one entrypoint we enable chuncks it is for more than one html file for all project
+
+```js
+export default {
+	build: {
+		rollupOptions: {
+			input: {
+				main: '/src/main.jsx',
+				warning: '/src/warning.jsx',
+				refrsh: 'refresh.js'
+			}
+		}
 	}
 };
 ```
@@ -118,28 +151,114 @@ export default {
 };
 ```
 
-### `define`
-
-Used to replace variables in code during bundling. For example, to replace `process.env.NODE_ENV`:
-
-```js
-export default {
-	define: {
-		'process.env.NODE_ENV': '"production"'
-	}
-};
-```
-
 ### `css`
 
-CSS-related options, such as PostCSS plugins, can be configured here.
+CSS-related options, such as modules and preprocessor options, and PostCSS plugins, can be configured here.
 
 ```js
 export default {
 	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: '@import "src/variables.scss";'
+			}
+		},
 		postcss: {
 			plugins: [require('autoprefixer')]
+		},
+		devSourcemap: true // enable source map for css, scss, ...
+	}
+};
+```
+
+### `resolve`
+
+Controls how module requests are resolved. You can define custom aliasing, extensions, and other options here.
+
+for aliasing add `{ "baseUrl": ".", "paths": { "@/*": ["src/*"] } }` too `tsconfig`.
+
+```js
+export default {
+	resolve: {
+		alias: {
+			'@': '/src'
 		}
+	}
+};
+```
+
+### `envPrefix`
+
+```js
+export default {
+	envPrefix: 'APP_' // default is VITE_,=
+};
+```
+
+### `envDir`
+
+`direnv` mean `.env` files should be in directory `./direnv`
+
+```js
+export default {
+	envDir: 'direnv' // default is `.`
+};
+```
+
+### `define`
+
+Used to replace variables in code during bundling. See following example:
+
+```js
+export default {
+	define: {
+		'process.env.NODE_ENV': 'production'
+	}
+};
+```
+
+### `clearScreen`
+
+Disable clear screen with every reboot.
+
+```js
+export default {
+	clearScreen: true
+};
+```
+
+### `logLevel`
+
+Specify which log should output, `info`, `warn`, `error`, `silent`.
+
+```js
+export default {
+	logLevel: 'silent' // default is `info`
+};
+```
+
+### `jsx`
+
+Controls JSX transformation, allowing you to specify the JSX factory, JSX fragment, or even disable JSX transformation.
+
+```js
+export default {
+	jsx: {
+		factory: 'h',
+		fragment: 'Fragment'
+	}
+};
+```
+
+### `ssr`
+
+Controls Server-Side Rendering (SSR) options, letting you specify an external file as the entry point for your server code and other settings.
+
+```js
+export default {
+	ssr: {
+		external: ['some-external-package'],
+		noExternal: ['some-local-package']
 	}
 };
 ```
@@ -170,119 +289,4 @@ async function startServer() {
 	});
 	await vite.listen();
 }
-```
-
-### `base`
-
-Defines the base public path when served in development or production. Useful for deploying to subdirectories.
-
-```js
-export default {
-	base: '/subdirectory/'
-};
-```
-
-### `publicDir`
-
-Specifies the folder to serve as the root for the dev server and to be copied to the root of the `dist` directory during the build.
-
-```js
-export default {
-	publicDir: 'public'
-};
-```
-
-### `build`
-
-Contains options for the build process, such as `rollupOptions`, `target`, `outDir`, and more. For example, you can control how CSS code-splitting works:
-
-```js
-export default {
-	build: {
-		cssCodeSplit: true
-	}
-};
-```
-
-### `server`
-
-Configuration options for the development server, such as `host`, `port`, `strictPort`, and `proxy`.
-
-```js
-export default {
-	server: {
-		port: 3000,
-		proxy: {
-			'/api': 'http://localhost:4000'
-		}
-	}
-};
-```
-
-### `resolve`
-
-Controls how module requests are resolved. You can define custom aliasing, extensions, and other options here.
-
-```js
-export default {
-	resolve: {
-		alias: {
-			'@': '/src'
-		}
-	}
-};
-```
-
-### `plugins`
-
-Allows you to add an array of plugins to extend Vite's functionality. Vite plugins are based on Rollup plugins but with additional hooks and properties that are Vite-specific.
-
-```js
-import Vue from '@vitejs/plugin-vue';
-
-export default {
-	plugins: [Vue()]
-};
-```
-
-### `css`
-
-CSS-related options, such as modules and preprocessor options.
-
-```js
-export default {
-	css: {
-		preprocessorOptions: {
-			scss: {
-				additionalData: '@import "src/variables.scss";'
-			}
-		}
-	}
-};
-```
-
-### `jsx`
-
-Controls JSX transformation, allowing you to specify the JSX factory, JSX fragment, or even disable JSX transformation.
-
-```js
-export default {
-	jsx: {
-		factory: 'h',
-		fragment: 'Fragment'
-	}
-};
-```
-
-### `ssr`
-
-Controls Server-Side Rendering (SSR) options, letting you specify an external file as the entry point for your server code and other settings.
-
-```js
-export default {
-	ssr: {
-		external: ['some-external-package'],
-		noExternal: ['some-local-package']
-	}
-};
 ```
