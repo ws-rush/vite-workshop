@@ -88,6 +88,34 @@ Notice how the CSS file is also dynamically added to the DOM as needed.
 
 **The moral of the story**: Dealing with asynchronous module loading is definitely less easy than just writing some `import` statements at the top of the file, but it also gives you the ability to slim down the size of your bundle and load _both_ CSS and JavaScript on an as-needed basis.
 
+### Typed CSS Modules
+
+If you're using TypeScript and CSS modules, you may want type support for your CSS classes. You can use a package like `tcm`, `typed-css-modules` or scripts that generate `.d.ts` files for your CSS modules.
+
+Here's how you might use `typed-css-modules`:
+
+```
+npm install -D typed-css-modules
+```
+
+Generate types:
+
+```
+tcm src -w
+```
+
+Include this in your `build` script to ensure the CSS types are always up-to-date.
+
+After all these steps, your `package.json` scripts section may look something like:
+
+```json
+{
+	"scripts": {
+		"build": "vite build && tsc --declaration --emitDeclarationOnly --outDir dist/types && tcm src -w"
+	}
+}
+```
+
 ## Tasting Notes
 
 Here are some additional notes on working with CSS that are a little esoteric. I'll leave these here for you to peruse if you're interested.
