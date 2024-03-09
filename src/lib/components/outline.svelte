@@ -49,6 +49,7 @@
 		<Link href="/proxying">Proxying API Requests</Link>
 		<Link href="/create-vite-server">createViteServer</Link>
 		<Link href="/middleware">Types of Middleware Mode</Link>
+		<Link href="/ssr">Server-Side Rendering</Link>
 	</Section>
 	<Section title="Plugins and Templates">
 		<Link href="/plugins">Plugins</Link>

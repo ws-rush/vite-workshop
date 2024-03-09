@@ -27,6 +27,7 @@ type ContentFile =
 	| 'library-mode'
 	| 'link-and-force-optimization'
 	| 'middleware'
+	| 'ssr'
 	| 'module-federation'
 	| 'multiple-entries-library'
 	| 'optimize-deps'
