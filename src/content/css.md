@@ -116,6 +116,8 @@ After all these steps, your `package.json` scripts section may look something li
 }
 ```
 
+> see more in Appendix
+
 ## Tasting Notes
 
 Here are some additional notes on working with CSS that are a little esoteric. I'll leave these here for you to peruse if you're interested.
