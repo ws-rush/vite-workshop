@@ -40,6 +40,7 @@
 	<Section title="Building Libraries">
 		<Link href="/library-mode">Library Mode</Link>
 		<Link href="/library-mode-components">Library Mode with Components</Link>
+		<Link href="/multiple-entries-library">Multiple Entries Library</Link>
 		<Link href="/module-federation">Module Federation</Link>
 	</Section>
 	<Section title="Server Integration">

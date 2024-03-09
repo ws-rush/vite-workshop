@@ -32,7 +32,7 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(__dirname, 'src/main.ts'),
-			name: 'SuperCoolLibrary',
+			name: 'SuperCoolLibrary', // package name, more in supported formats
 			fileName: 'super-cool-library'
 		}
 	}
@@ -79,6 +79,8 @@ This is not-Vite-specific, but let's cover some quick terminology:
 - `module`: An ECMAScript module ID that is the primary entry point to your program.
 - `exports`: The module path that is resolved when this specifier is imported. Set to `null` to disallow importing this module.
 
+Now in library `npm link` to link library to operationg system, and in other project `npm link super-cool-library` to use it.
+
 ## Supported Formats
 
 We didn't specify what formats we wanted, so Vite used Rollup's defaults of `es` and `umd`. But, it will support any of the following:
@@ -124,7 +126,7 @@ Some notable options:
 
 ## External Dependencies
 
-You don't necessarily want to include Svelte or React or Vue with your library as the consuming application has likely specified its own version of these dependencies.
+If imported any code from third-party library vite will include all of this function source in our code. You don't necessarily want to include Svelte or React or Vue with your library as the consuming application has likely specified its own version of these dependencies.
 
 We can define what _not_ to include using `rollupOptions.external`:
 
@@ -144,6 +146,8 @@ export default defineConfig({
 });
 ```
 
+Also it is better to include external dependcies as `peerDependcies` in library `package.json`
+
 ## Including Styles
 
 Now, if we have these React (or whatever) components, Vite is going to try to roll them all up—pun _unintended_—into one `style.css` file, which is sub-optimal for all of the code-splitting goodness that we've been after when another Vite application consumes it. Bummer.
@@ -158,7 +162,4 @@ npm i -D vite-plugin-lib-inject-css
 
 - Show how to use `glob` to split up the CSS.
 - Add `types` entry to `package.json`.
-- Set up the `peerDependencies`.
-- Set up `sideEffects` entry in `package.json`.
-- Set up a `prepublish` step.
 - Multiple entries.

@@ -28,6 +28,7 @@ type ContentFile =
 	| 'link-and-force-optimization'
 	| 'middleware'
 	| 'module-federation'
+	| 'multiple-entries-library'
 	| 'optimize-deps'
 	| 'plugin-inline-css'
 	| 'plugin-markdown'
