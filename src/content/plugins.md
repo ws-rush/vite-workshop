@@ -4,7 +4,7 @@ title: Vite Plugins
 
 # Vite Plugins
 
-Writing a Vite plugin can be a powerful way to extend Vite's functionality or integrate it with other tools and workflows. Below is a comprehensive guide that covers everything you need to know to get started with writing a Vite plugin:
+Vite has garnered a lot of attention due to its speed and simplicity. One of the key features that make Vite a powerful tool is its plugin system. While there are many community-contributed plugins available (see [aweasome-vite](https://github.com/vitejs/awesome-vite), [aweasome-rollup](https://github.com/rollup/awesome), and [rollip-vite plugins](https://vite-rollup-plugins.patak.dev/)), there may be times you need something more specific for your project. This tutorial will guide you through the process of writing your own custom Vite plugin.
 
 ## Understanding Vite Plugins
 
@@ -38,15 +38,27 @@ A basic Vite plugin can be an object with properties that define its functionali
 Example:
 
 ```js
-export default function myPlugin(options = {}) {
-	return {
-		name: 'my-plugin',
-		transform(code, id) {
-			// Your transformation logic
-		}
-	};
-}
+export default {
+	name: 'my-vite-plugin',
+	apply: 'build', // Specify when the plugin should be run (either 'serve' for dev server, 'build' for builds, (config: { command, mode }) => boolean for spesfic condations, or omit to always run)
+	configResolved(config) {
+		// Maybe we need get user config. This is called once the config is resolved.
+		// Run before transform hook, so we can use it to access config and store them for other hooks.
+	},
+	load(id) {
+		// Override the load phase for specific modules.
+	},
+	transform(code, id) {
+		// Transform a given code snippet.
+	},
+	transformIndexHtml(html) {
+		// Manuplate or generate index html file
+		return html.replace(/<\/body>/, `<script>alert('hello!')</script></body>`);
+	}
+};
 ```
+
+There are some other hooks, but that's enough to get us started.
 
 # Adding Your Plugin to the Vite Configuration
 

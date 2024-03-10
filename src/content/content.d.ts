@@ -6,7 +6,6 @@ type ContentFile =
 	| 'configuration'
 	| 'core-features'
 	| 'create-vite-server'
-	| 'creating-a-text-plugin'
 	| 'css-and-typescript'
 	| 'css-modules'
 	| 'css'
