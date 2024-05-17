@@ -4,6 +4,8 @@ title: Introduction
 
 # Course Introduction
 
+>**Note:** These notes have been modified by [ws-rush](https://github.com/ws-rush). You can find the modified version in my GitHub repository [here](https://github.com/ws-rush/vite-workshop).
+
 These are my notes from the [Vite Course for Frontend Masters
 ](https://frontendmasters.com/courses/vite/).
 
