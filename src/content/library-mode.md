@@ -105,7 +105,8 @@ And we'll update our `vite.config.ts` accordingly.
 
 ```ts
 export default defineConfig({
-	plugins: [dts()],
+	// `insertTypesEntry` option group all types in one types file
+	plugins: [dts({ insertTypesEntry: true })],
 	build: {
 		lib: {
 			entry: resolve(__dirname, 'src/main.ts'),
@@ -115,6 +116,8 @@ export default defineConfig({
 	}
 });
 ```
+
+>dont forget add exported type file in `package.json` as  `"types": "./dist/lib.d.ts"`
 
 We can explore some more of [the options for `vite-dts-plugins`](https://github.com/qmhc/vite-plugin-dts#options).
 
@@ -161,5 +164,4 @@ npm i -D vite-plugin-lib-inject-css
 ## Next Steps
 
 - Show how to use `glob` to split up the CSS.
-- Add `types` entry to `package.json`.
 - Multiple entries.
